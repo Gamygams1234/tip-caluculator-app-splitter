@@ -32,6 +32,7 @@
   font-family: "Space Mono", monospace;
   font-weight: 700;
   outline: none;
+  color: #00494d;
 }
 .form-group input[type=number]:focus {
   color: #00494d;
@@ -189,6 +190,7 @@ header {
   font-weight: 700;
   width: 100%;
   outline: none;
+  color: #00494d;
 }
 .tip-calculator .tip-calculator-inner .user-input .select-tip .percentage-grid input[type=number]:focus {
   color: #00494d;

@@ -32,6 +32,7 @@ $warning: rgba(255, 0, 0, 0.8);
         font-family: "Space Mono", monospace;
         font-weight: 700;
         outline: none;
+        color: $veryDarkCyan;
     }
     input[type="number"]:focus {
         color: $veryDarkCyan;
@@ -163,6 +164,7 @@ header {
                         font-weight: 700;
                         width: 100%;
                         outline: none;
+                        color: $veryDarkCyan;
                     }
                     input[type="number"]:focus {
                         color: $veryDarkCyan;
