@@ -32,7 +32,7 @@
         <div class="user-input">
           <div class="form-group bill-form">
             <label for="billInput">Bill</label>
-            <input type="text" class="" id="billInput" placeholder="0">
+            <input type="number" class="" id="billInput" placeholder="0">
           </div>
           <div class="select-tip">
             <h3>Select Tip %</h3>
@@ -42,13 +42,13 @@
               <button>15%</button>
               <button>25%</button>
               <button>50%</button>
-              <input type="text" class="percentage-input" id="customInput" placeholder="Custom">
+              <input type="number" class="percentage-input" id="customInput" placeholder="Custom">
 
             </div>
           </div>
           <div class="form-group people-form" id="numberOfPeopleForm">
             <label for="peopeInput">Number of People</label>
-            <input type="text" class="" id="peopleInput" placeholder="0">
+            <input type="number" class="" id="peopleInput" placeholder="0">
             <p class="warning-text">Can't be zero</p>
           </div>
 
@@ -150,23 +150,14 @@
     });
     billInput.addEventListener('keyup', function () {
       resetButton.classList.remove("disabled");
-      if (!isNaN(this.value)) {
-        total = parseFloat(this.value)
-      } else {
-        this.value = "";
-        total = 0;
-      }
+
+      total = parseFloat(this.value)
+
       updateUI();
     })
     customInput.addEventListener('keyup', function () {
       resetButton.classList.remove("disabled");
-      if (!isNaN(this.value)) {
-        tipPercentage = (parseInt(this.value) * .01)
-
-      } else {
-        this.value = "";
-        tipPercentage = 0;
-      }
+      tipPercentage = (parseInt(this.value) * .01)
       updateUI();
     })
     peopleInput.addEventListener('keyup', function () {

@@ -33,7 +33,7 @@
   font-weight: 700;
   outline: none;
 }
-.form-group input[type=text]:focus {
+.form-group input[type=number]:focus {
   color: #00494d;
   border: 1px solid #26c0ab;
 }
@@ -190,7 +190,7 @@ header {
   width: 100%;
   outline: none;
 }
-.tip-calculator .tip-calculator-inner .user-input .select-tip .percentage-grid input[type=text]:focus {
+.tip-calculator .tip-calculator-inner .user-input .select-tip .percentage-grid input[type=number]:focus {
   color: #00494d;
 }
 .tip-calculator .tip-calculator-inner .user-result {
@@ -255,6 +255,17 @@ header {
 }
 .tip-calculator .tip-calculator-inner .user-result .disabled:hover {
   background-color: #0d6468;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
 
 @media screen and (min-width: 768px) {
