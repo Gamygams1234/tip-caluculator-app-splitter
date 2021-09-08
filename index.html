@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+
+  <title>Frontend Mentor | Tip calculator app</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="css/reset.css">
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+
+</head>
+
+<body>
+  <div class="body">
+    <header>
+      <div class="logo">
+        <img src="./images/logo.svg" alt="">
+      </div>
+    </header>
+
+    <div class="tip-calculator">
+      <div class="tip-calculator-inner">
+        <div class="user-input">
+          <div class="form-group bill-form">
+            <label for="billInput">Bill</label>
+            <input type="text" class="" id="billInput" placeholder="0">
+          </div>
+          <div class="select-tip">
+            <h3>Select Tip %</h3>
+            <div class="percentage-grid" id="percentage-buttons">
+              <button>5%</button>
+              <button>10%</button>
+              <button>15%</button>
+              <button>25%</button>
+              <button>50%</button>
+              <input type="text" class="percentage-input" id="customInput" placeholder="Custom">
+
+            </div>
+          </div>
+          <div class="form-group people-form" id="numberOfPeopleForm">
+            <label for="peopeInput">Number of People</label>
+            <input type="text" class="" id="peopleInput" placeholder="0">
+            <p class="warning-text">Can't be zero</p>
+          </div>
+
+        </div>
+        <div class="user-result">
+          <div class="tip-amount result">
+            <div class="info">
+              <h3>Tip Amount</h3>
+              <h4>/ person</h4>
+
+            </div>
+            <div class="amount fw-700" id="tipPerPerson">$0.00</div>
+          </div>
+          <div class="total-amount result">
+            <div class="info">
+              <h3>Total Amount</h3>
+              <h4>/ person</h4>
+
+            </div>
+            <div class="amount fw-700" id="totalPerPerson">$0.00</div>
+          </div>
+
+          <button class="reset-button disabled" id="resetButton">RESET</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    var tipPerPerson = document.getElementById("tipPerPerson");
+    var totalPerPerson = document.getElementById("totalPerPerson");
+    var percentageButtons = document.getElementById("percentage-buttons");
+    var billInput = document.getElementById("billInput");
+    var peopleInput = document.getElementById("peopleInput");
+    var numberOfPeopleForm = document.getElementById("numberOfPeopleForm");
+    var customInput = document.getElementById("customInput");
+    var resetButton = document.getElementById("resetButton");
+
+    var total = 0;
+    var tipPercentage = 0;
+    var numberOfPeople = 0;
+    var tipTotal = 0;
+
+
+    function updateUI() {
+      // this will make sure that we are rounded up every time
+      if (isNaN(total)) {
+        total = 0
+      }
+
+      if (numberOfPeople === 0 || isNaN(numberOfPeople)) {
+        totalPerPerson.innerHTML = "$0.00"
+        tipPerPerson.innerHTML = "$0.00"
+      } else if (isNaN(tipPercentage)) {
+        totalPerPerson.innerHTML = `$${(Math.ceil(total * 100) / 100 / numberOfPeople).toFixed(2)}`
+        tipPerPerson.innerHTML = "$0.00"
+      }
+
+
+      else {
+        tipTotal = (Math.ceil(total * tipPercentage * 100) / 100 / numberOfPeople).toFixed(2);
+        console.log(tipTotal)
+        totalPerPerson.innerHTML = `$${((Math.ceil(total * 100) / 100 / numberOfPeople) + (parseFloat(tipTotal))).toFixed(2)}`;
+        tipPerPerson.innerHTML = `$${tipTotal}`;
+      }
+    }
+
+    resetButton.addEventListener('click', function (e) {
+      // use array from to traverse the dom
+      Array.from(percentageButtons.children).forEach(function (item) {
+        item.classList.remove("active");
+      })
+
+      total = 0;
+      tipPercentage = 0;
+      numberOfPeople = 0;
+      tipTotal = 0;
+      billInput.value = "";
+      peopleInput.value = "";
+      customInput.value = "";
+      this.classList.add("disabled");
+      numberOfPeopleForm.classList.remove("warning");
+      updateUI();
+    });
+
+    percentageButtons.addEventListener('click', function (e) {
+      // use array from to traverse the dom
+      Array.from(this.children).forEach(function (item) {
+        item.classList.remove("active");
+      })
+      if (e.target.tagName === "BUTTON") {
+        e.target.classList.add("active");
+        customInput.value = "";
+        tipPercentage = (parseInt(e.target.innerHTML.replace('%', '')) * .01);
+      }
+      resetButton.classList.remove("disabled");
+      updateUI();
+    });
+    billInput.addEventListener('keyup', function () {
+      resetButton.classList.remove("disabled");
+      if (!isNaN(this.value)) {
+        total = parseFloat(this.value)
+      } else {
+        this.value = "";
+        total = 0;
+      }
+      updateUI();
+    })
+    customInput.addEventListener('keyup', function () {
+      resetButton.classList.remove("disabled");
+      if (!isNaN(this.value)) {
+        tipPercentage = (parseInt(this.value) * .01)
+
+      } else {
+        this.value = "";
+        tipPercentage = 0;
+      }
+      updateUI();
+    })
+    peopleInput.addEventListener('keyup', function () {
+      resetButton.classList.remove("disabled");
+
+      if (!isNaN(this.value)) {
+        numberOfPeople = parseFloat(this.value)
+
+      } else {
+        this.value = "";
+        numberOfPeople = 0;
+      }
+      updateUI();
+    })
+    peopleInput.addEventListener('blur', function () {
+      resetButton.classList.remove("disabled");
+      if (numberOfPeople === 0 || isNaN(numberOfPeople)) {
+        numberOfPeopleForm.classList.add("warning");
+      }
+    })
+    peopleInput.addEventListener('focus', function () {
+      numberOfPeopleForm.classList.remove("warning");
+    })
+    updateUI()
+
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,253 @@
+$strongCyan: hsl(172, 67%, 45%);
+$veryDarkCyan: hsl(183, 100%, 15%);
+$darkGrayishCyan: hsl(186, 14%, 43%);
+$darkGrayishCyanSecond: hsl(184, 14%, 56%);
+$lightGrayishCyan: hsl(185, 41%, 84%);
+$lightGrayishCyanSecond: hsl(189, 41%, 97%);
+$white: hsl(0, 0%, 100%);
+$warning: rgba(255, 0, 0, 0.8);
+.fw-400 {
+    font-weight: 400;
+}
+.fw-700 {
+    font-weight: 700;
+}
+.form-group {
+    display: flex;
+    flex-direction: column;
+    font-family: "Space Mono", monospace;
+    position: relative;
+    label {
+        margin-bottom: 0.5em;
+        font-weight: 700;
+        font-size: 0.75em;
+        color: $darkGrayishCyan;
+    }
+    input {
+        font-size: 1em;
+        padding: 0.25em 1em;
+        text-align: right;
+        background-color: $lightGrayishCyanSecond;
+        border: 1px solid transparent;
+        font-family: "Space Mono", monospace;
+        font-weight: 700;
+        outline: none;
+    }
+    input[type="text"]:focus {
+        color: $veryDarkCyan;
+        border: 1px solid $strongCyan;
+    }
+
+    .warning-text {
+        display: none;
+    }
+}
+
+.bill-form::after {
+    position: absolute;
+    content: url(../images/icon-dollar.svg);
+    left: 1em;
+    top: 50%;
+    height: 1em;
+    width: auto;
+}
+.people-form::after {
+    position: absolute;
+    content: url(../images/icon-person.svg);
+    left: 1em;
+    top: 50%;
+    height: 1em;
+    width: auto;
+}
+.warning {
+    input {
+        border: 1px solid $warning;
+    }
+    .warning-text {
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: 0.75em;
+        font-weight: 700;
+        color: $warning;
+        display: block;
+    }
+}
+.body {
+    font-family: "Space Mono", monospace;
+    font-size: 24px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    background-color: $lightGrayishCyan;
+}
+input {
+    border-radius: 6px;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    padding-top: 3em;
+    padding-bottom: 3em;
+    align-items: flex-end;
+    width: 100%;
+    background-color: $lightGrayishCyan;
+}
+.tip-calculator {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+    .tip-calculator-inner {
+        border-radius: 1em 1em 0 0;
+        width: 100%;
+        background-color: $white;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: 1em;
+        padding: 1em;
+        .user-input {
+            display: flex;
+            flex-direction: column;
+
+            .bill-form {
+                margin-bottom: 1em;
+            }
+            .select-tip {
+                margin-bottom: 1em;
+                h3 {
+                    margin-bottom: 0.5em;
+                    font-weight: 700;
+                    color: $darkGrayishCyan;
+                    font-size: 0.75em;
+                }
+                .percentage-grid {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    grid-gap: 0.5em;
+                    button {
+                        font-size: 1em;
+                        padding: 0.25em 1em;
+                        color: hsl(0, 0%, 100%);
+                        background-color: hsl(183, 100%, 15%);
+                        border-radius: 0.2em;
+                        font-family: "Space Mono", monospace;
+                        font-weight: 700;
+                        border: 1px solid transparent;
+                        transition: 0.1s ease-in-out;
+                    }
+                    button:hover {
+                        border: 1px solid transparent;
+                        color: $veryDarkCyan;
+                        background-color: $lightGrayishCyan;
+                    }
+                    // button {
+                    //     border: 1px solid transparent;
+                    //     color: $veryDarkCyan;
+                    //     background-color: $lightGrayishCyan;
+                    // }
+
+                    .active {
+                        color: $veryDarkCyan;
+                        background-color: $strongCyan;
+                    }
+                    input {
+                        width: calc(100% - 2em);
+                        font-size: 1em;
+                        padding: 0.25em 0;
+                        text-align: center;
+                        background-color: $lightGrayishCyanSecond;
+                        border: 1px solid transparent;
+                        font-family: "Space Mono", monospace;
+                        font-weight: 700;
+                        width: 100%;
+                        outline: none;
+                    }
+                    input[type="text"]:focus {
+                        color: $veryDarkCyan;
+                    }
+                }
+            }
+        }
+
+        .user-result {
+            background-color: $veryDarkCyan;
+            padding: 2em;
+            border-radius: 1em;
+            .result {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 2.5em;
+                .info {
+                    flex-direction: column;
+                    justify-content: space-between;
+                    h3 {
+                        color: $white;
+                        font-size: 0.75em;
+                        margin-bottom: 0.5em;
+                    }
+                    h4 {
+                        color: $darkGrayishCyanSecond;
+                        font-size: 0.5em;
+                    }
+                }
+                .amount {
+                    font-size: 1.75em;
+                    color: $strongCyan;
+                }
+            }
+            .reset-button {
+                font-size: 1em;
+                padding: 0.25em 1em;
+                color: $veryDarkCyan;
+                background-color: $strongCyan;
+                border-radius: 0.2em;
+                width: 100%;
+                font-family: "Space Mono", monospace;
+                font-weight: 700;
+                border: 1px solid transparent;
+                transition: 0.1s ease-in-out;
+            }
+            .reset-button:hover {
+                border: 1px solid transparent;
+                color: $veryDarkCyan;
+                background-color: $strongCyan;
+            }
+            .disabled {
+                background-color: hsl(183, 78%, 23%);
+            }
+            .disabled:hover {
+                background-color: hsl(183, 78%, 23%);
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .tip-calculator {
+        align-items: center;
+
+        .tip-calculator-inner {
+            max-width: 768px;
+            border-radius: 1em;
+            grid-template-columns: 1fr 1fr;
+            .user-input {
+                .select-tip {
+                    .percentage-grid {
+                        grid-template-columns: 1fr 1fr 1fr;
+                    }
+                }
+            }
+            .user-result {
+                position: relative;
+                .reset-button {
+                    position: absolute;
+                    bottom: 2em;
+                    width: calc(100% - 4em);
+                }
+            }
+        }
+    }
+}
